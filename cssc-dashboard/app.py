@@ -4,16 +4,25 @@ from flask import request
 
 import secrets
 
+import os
+
+import dotenv
+
+dotenv.load_dotenv()
+
+
 
 
 app = flask.Flask(__name__)
-app.secret_key = secrets.token_urlsafe(16)
+app.secret_key = os.getenv('SECRET_KEY')
+
+password = os.getenv('PASSWORD')
 
 @app.route('/authenticate', methods=['POST'])
 def hellp_world():
     data = request.form.get('password')
 
-    if data == "password":
+    if data == password:
         session['logged_in'] = True
         return flask.redirect(flask.url_for('dashboard'))
     return flask.redirect(flask.url_for('login'))
