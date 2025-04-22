@@ -29,7 +29,9 @@ def load_door_stat():
 
 
 def write_door_stat(status):
-    with open('static/door_status.json', 'w') as f:
+
+    root = os.path.realpath(__file__)[:-len(os.path.basename(__file__))]
+    with (open(f'{root}/static/door_status.json', 'w') as f):
         json.dump({"door_open": status}, f)
 
 
