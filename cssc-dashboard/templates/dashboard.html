@@ -31,24 +31,24 @@
             <div class="events">
                 <ul>
                     <div class="event">
-                        <li>hello - 21marc</li>
-                        hello
+                        <li>PLACEHOLDER</li>
                     </div>
-                    <li></li>
+                    <li>PLACEHOLDER</li>
                 </ul>
             </div>
             <div>
-                Create event
+                PLACEHOLDER
             </div>
         </div>
 
         <div class="col_container">
             <div class="row_container">
-                <h2>Update text on door</h2>
-                <h2>Update text on door</h2>
+                <h2>Door Control | Status: </h2>
+                <h2 id="door_status">{{ door_status }}</h2>
             </div>
-            <div>
-                hello
+             <div class="row_container">
+                <a href="/api/open_door">Click to <b>open</b> door</a>
+                 <a href="/api/close_door">Click to <b>close</b> door</a>
             </div>
         </div>
     </div>
@@ -61,6 +61,8 @@
 
 </div>
 </div>
+
+<script type="text/javascript" src="../static/door_control.js"></script>
 
 </body>
 </html>
