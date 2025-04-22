@@ -21,8 +21,17 @@ password = os.getenv('PASSWORD')
 with app.open_resource('static/events.json') as f:
     data = json.load(f)
 
-with app.open_resource('static/info.json') as f:
-    info = json.load(f)
+def load_door_stat():
+    with open('static/door_status.json', 'r') as f:
+        door_stat = json.load(f)
+
+        return door_stat
+
+
+def write_door_stat(status):
+    with open('static/door_status.json', 'w') as f:
+        json.dump({"door_open": status}, f)
+
 
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
@@ -46,7 +55,9 @@ def door_auth():
 def dashboard():
     if not session.get('logged_in'):
         return flask.redirect(flask.url_for('login'))
-    if info["door_open"]:
+
+    door_status = load_door_stat()
+    if door_status["door_open"]:
         door_stat = "Open"
     else:
         door_stat = "Closed"
@@ -75,14 +86,14 @@ def get_door_status():
     if not session.get('logged_in'):
         return flask.redirect(flask.url_for('login'))
 
-    return flask.jsonify({'door_open': info['door_open']})
+    return flask.jsonify(load_door_stat())
 
 @app.route('/api/open_door')
 def open_door():
     if not session.get('logged_in'):
         return flask.redirect(flask.url_for('login'))
 
-    info['door_open'] = 1
+    write_door_stat(1)
     return flask.redirect(flask.url_for('dashboard'))
 
 @app.route('/api/close_door')
@@ -90,5 +101,5 @@ def close_door():
     if not session.get('logged_in'):
         return flask.redirect(flask.url_for('login'))
 
-    info['door_open'] = 0
+    write_door_stat(0)
     return flask.redirect(flask.url_for('dashboard'))
