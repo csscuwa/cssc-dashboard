@@ -22,7 +22,8 @@ with app.open_resource('static/events.json') as f:
     data = json.load(f)
 
 def load_door_stat():
-    with open('static/door_status.json', 'r') as f:
+    root = os.path.realpath(__file__)[:-len(os.path.basename(__file__))]
+    with open(f'{root}static/door_status.json', 'r') as f:
         door_stat = json.load(f)
 
         return door_stat
