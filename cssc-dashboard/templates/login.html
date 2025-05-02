@@ -13,16 +13,21 @@
     <img src="../static/imgs/cssc_text.svg" alt="" class="textimg">
     <h1>| Login</h1>
 </div>
-<img>
-<form action="http://portal.cssc.asn.au/authenticate" method="post">
-  <div>
-    <label for="password">Please enter the CSSC Admin Password</label> <br>
-    <input name="password" id="password" value="" />
-  </div>
-  <div>
-    <button>Login</button>
-  </div>
-</form>
+<div style="display: flex; justify-content: center; padding-top: 20px">
+        <form id="login_form" action="/api/auth" method="post">
+            <div>
+            <h2>Login</h2>
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 10px;">
+                <label for="password">Please enter the CSSC Admin Password</label> <br>
+                <input style="width: 100%" type="password" name="password" id="password" value=""/><br>
+                <button style="width: 100%" type="submit">Login</button>
+                <label id="password_success"></label>
+            </div>
+            </div>
+        </form>
 
+</div>
+
+<script type="text/javascript" src="../static/js/login.js"></script>
 </body>
 </html>

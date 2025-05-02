@@ -28,6 +28,25 @@
 
     <div class="row_container">
         <div class="col_container">
+            <div class="row_container">
+                <h2>Door Control | Status: </h2>
+                <h2 id="door_status">{{ door_status }}</h2>
+            </div>
+            <div class="row_container">
+                <a href="/api/open_door">Click to <b>open</b> door</a>
+                <a href="/api/close_door">Click to <b>close</b> door</a>
+            </div>
+            <h3>Update Text on Door</h3>
+            <div>
+                <form action="/api/scrolltext_update" method="post">
+                    <label for="scrolltext">Update Scrolling Text:</label><br>
+                    <input type="text" id="scrolltext" name="scrolltext" value="{{ scrolltext }}"><br><br>
+                    <input type="submit" value="Update">
+                </form><br>
+            </div>
+        </div>
+
+        <div class="col_container">
             <div class="events">
                 <ul>
                     <div class="event">
@@ -38,17 +57,6 @@
             </div>
             <div>
                 PLACEHOLDER
-            </div>
-        </div>
-
-        <div class="col_container">
-            <div class="row_container">
-                <h2>Door Control | Status: </h2>
-                <h2 id="door_status">{{ door_status }}</h2>
-            </div>
-             <div class="row_container">
-                <a href="/api/open_door">Click to <b>open</b> door</a>
-                 <a href="/api/close_door">Click to <b>close</b> door</a>
             </div>
         </div>
     </div>
