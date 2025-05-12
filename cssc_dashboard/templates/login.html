@@ -14,12 +14,18 @@
     <h1>| Login</h1>
 </div>
 <div style="display: flex; justify-content: center; padding-top: 20px">
-        <form id="login_form" action="/api/auth" method="post">
+        <form id="login_form">
             <div>
             <h2>Login</h2>
             <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 10px;">
-                <label for="password">Please enter the CSSC Admin Password</label> <br>
-                <input style="width: 100%" type="password" name="password" id="password" value=""/><br>
+                <div>
+                    <label for="username">Username:</label><br>
+                    <input style="width: 100%" type="text" name="username" id="username" value=""/><br>
+                </div>
+                <div>
+                    <label for="password">Password:</label><br>
+                    <input style="width: 100%" type="password" name="password" id="password" value=""/><br>
+                </div>
                 <button style="width: 100%" type="submit">Login</button>
                 <label id="password_success"></label>
             </div>

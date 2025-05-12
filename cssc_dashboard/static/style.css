@@ -64,3 +64,10 @@ body {
 .events {
 
 }
+
+.isDisabled {
+  color: currentColor;
+  display: inline-block;
+  pointer-events: none;
+  text-decoration: none;
+}

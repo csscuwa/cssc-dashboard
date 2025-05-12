@@ -8,7 +8,7 @@ form.addEventListener('submit', async (event) => {
   const formData = new FormData(form);
 
   try {
-    const response = await fetch('/api/auth', {
+    const response = await fetch('/auth', {
       method: 'POST',
       body: formData,
     });

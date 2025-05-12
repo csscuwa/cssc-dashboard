@@ -23,7 +23,7 @@
 
 </div>
 <div class="body_container">
-<h2>Welcome my liege</h2>
+<h2>Currently logged in as: {{ username }}<br>Kneel to your liege.</h2>
 <div class="container">
 
     <div class="row_container">
@@ -33,8 +33,8 @@
                 <h2 id="door_status">{{ door_status }}</h2>
             </div>
             <div class="row_container">
-                <a href="/api/open_door">Click to <b>open</b> door</a>
-                <a href="/api/close_door">Click to <b>close</b> door</a>
+                <a id="door_open" href="/api/open_door">Click to <b>open</b> door</a>
+                <a id="door_close" href="/api/close_door">Click to <b>close</b> door</a>
             </div>
             <h3>Update Text on Door</h3>
             <div>
@@ -70,7 +70,7 @@
 </div>
 </div>
 
-<script type="text/javascript" src="../static/door_control.js"></script>
+<script type="text/javascript" src="/static/js/door_control.js"></script>
 
 </body>
 </html>
