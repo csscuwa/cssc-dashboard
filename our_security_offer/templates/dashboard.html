@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="../static/style.css">
+    <script type="text/javascript" src="/static/events.js"></script>
+
+<!--&lt;!&ndash;    Scripts&ndash;&gt;-->
+<!--    <script type="text/javascript">-->
+<!--        var epic = get_event_json()-->
+
+<!--        console.log(epic)-->
+<!--    </script>-->
+
+</head>
+<body>
+<div class="header">
+    <img src="../static/imgs/cssc_logo.svg" alt="" class="logoimg">
+    <img src="../static/imgs/cssc_text.svg" alt="" class="textimg">
+    <h1> | Dashboard</h1>
+    <div style="position: absolute; top: 20px; right: 20px;">
+        <form action="/logout" method="get">
+            <button type="submit" style="padding: 8px 12px;"><strong>Logout</strong></button>
+        </form>
+    </div>
+</div>
+<div class="body_container">
+<h2>Welcome my liege</h2>
+<div class="container">
+
+    <div class="row_container">
+        <div class="col_container">
+            <div class="row_container">
+                <h2>Door Control | Status: </h2>
+                <h2 id="door_status">{{ door_status }}</h2>
+            </div>
+            <div class="row_container">
+                <a href="/api/open_door">Click to <b>open</b> door</a>
+                <a href="/api/close_door">Click to <b>close</b> door</a>
+            </div>
+            <h3>Update Text on Door</h3>
+            <div>
+                <form action="/api/scrolltext_update" method="post">
+                    <label for="scrolltext">Update Scrolling Text:</label><br>
+                    <input type="text" id="scrolltext" name="scrolltext" value="{{ scrolltext }}"><br><br>
+                    <input type="submit" value="Update">
+                </form><br>
+            </div>
+        </div>
+
+        <div class="col_container">
+            <div class="events">
+                <ul>
+                    <div class="event">
+                        <li>PLACEHOLDER</li>
+                    </div>
+                    <li>PLACEHOLDER</li>
+                </ul>
+            </div>
+            <div>
+                PLACEHOLDER
+            </div>
+        </div>
+    </div>
+
+    <div class="row_container" style="margin-top: 40px;">
+        <div class="col_container" style="max-width: 400px;">
+            <h3>Change Your Password</h3>
+            <form action="/change_password" method="post">
+                <label for="current_password">Current Password:</label><br>
+                <input type="password" id="current_password" name="current_password" required><br><br>
+
+                <label for="new_password">New Password:</label><br>
+                <input type="password" id="new_password" name="new_password" required><br><br>
+
+                <input type="submit" value="Update Password">
+            </form>
+            {% if password_message %}
+                <p style="color: {{ 'green' if password_success else 'red' }}; margin-top: 10px;">{{ password_message }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script type="text/javascript" src="../static/door_control.js"></script>
+<script type="text/javascript" src="../static/js/login.js"></script>
+</body>
+</html>

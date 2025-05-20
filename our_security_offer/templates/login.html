@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSSC Portal | Login</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+<body>
+<div class="header">
+    <img src="../static/imgs/cssc_logo.svg" alt="" class="logoimg">
+    <img src="../static/imgs/cssc_text.svg" alt="" class="textimg">
+    <h1>| Login</h1>
+</div>
+<div style="display: flex; justify-content: center; padding-top: 20px">
+    <form id="login_form" action="/api/auth" method="post" >
+        <div>
+            <h2>Login</h2>
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 10px;">
+                <!-- Username Field -->
+                <label for="username">Username</label>
+                <input style="width: 100%" type="text" name="username" id="username" required />
+
+                <!-- Password Field -->
+                <label for="password">Password</label>
+                <input style="width: 100%" type="password" name="password" id="password" value=""/><br>
+
+                <!-- Login button (will be hidden after successful password check) -->
+                <button style="width: 100%" type="submit" id="login_btn">Login</button>
+
+                <!-- MFA Section (initially hidden) -->
+                <div id="mfa_section" style="display: none; flex-direction: column; gap: 10px; width: 100%;">
+                    <label for="mfa_code">Enter MFA Code</label>
+                    <input style="width: 100%" type="text" name="mfa_code" id="mfa_code" maxlength="6" />
+                    <button type="button" id="verify_btn" style="width: 100%;">Verify</button>
+                </div>
+
+                <!-- Message display -->
+                <label id="password_success"></label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="../static/js/login.js"></script>
+</body>
+</html>
