@@ -8,7 +8,7 @@ form.addEventListener('submit', async (event) => {
   const formData = new FormData(form);
 
   try {
-    const response = await fetch('/auth', {
+    const response = await fetch('/api/auth', {
       method: 'POST',
       body: formData,
     });
@@ -18,7 +18,7 @@ form.addEventListener('submit', async (event) => {
         response.json().then((data) => {
             if (data["logged_in"]) {
                 success.innerHTML = "<b><i>Logged in. Redirecting...</i></b>";
-                window.location.replace("/dashboard");
+                window.location.replace("/home");
             } else {
                 success.innerHTML = "Error: not logged in";
             }

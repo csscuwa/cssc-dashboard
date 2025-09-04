@@ -20,10 +20,10 @@
     <img src="../static/imgs/cssc_logo.svg" alt="" class="logoimg">
     <img src="../static/imgs/cssc_text.svg" alt="" class="textimg">
     <h1> | Dashboard</h1>
-
 </div>
 <div class="body_container">
-<h2>Currently logged in as: {{ username }}<br>Kneel to your liege.</h2>
+<h2>Currently logged in as: {{ username }}: <a href="/logout">Logout</a></h2> <br>
+
 <div class="container">
 
     <div class="row_container">
@@ -33,15 +33,16 @@
                 <h2 id="door_status">{{ door_status }}</h2>
             </div>
             <div class="row_container">
-                <a id="door_open" href="/api/open_door">Click to <b>open</b> door</a>
-                <a id="door_close" href="/api/close_door">Click to <b>close</b> door</a>
+                <button id="door_open">Click to <b>open</b> door</button>
+                <button id="door_close">Click to <b>close</b> door</button>
             </div>
             <h3>Update Text on Door</h3>
             <div>
-                <form action="/api/scrolltext_update" method="post">
-                    <label for="scrolltext">Update Scrolling Text:</label><br>
-                    <input type="text" id="scrolltext" name="scrolltext" value="{{ scrolltext }}"><br><br>
-                    <input type="submit" value="Update">
+                <form id="door_text_form" action="/api/door/set_text">
+                    <label for="door_text">Update Door Text:</label><br>
+                    <input type="text" id="door_text" name="door_text" value="{{ door_text }}"><br><br>
+                    <input type="submit" id="door_text_submit" value="Update"><br>
+                    <span id="door_text_label"></span>
                 </form><br>
             </div>
         </div>
@@ -70,7 +71,7 @@
 </div>
 </div>
 
-<script type="text/javascript" src="/static/js/door_control.js"></script>
+<script type="text/javascript" src="/static/js/door.js"></script>
 
 </body>
 </html>

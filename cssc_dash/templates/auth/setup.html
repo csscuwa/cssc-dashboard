@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSSC Portal | Setup</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+<body>
+<div class="header">
+    <img src="../static/imgs/cssc_logo.svg" alt="" class="logoimg">
+    <img src="../static/imgs/cssc_text.svg" alt="" class="textimg">
+    <h1>| Setup</h1>
+</div>
+<div style="display: flex; justify-content: center; padding-top: 20px">
+        <form id="setup_form">
+            <div>
+            <h2>Setup</h2>
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 10px;">
+                <div style="display: flex; justify-content: center; align-items: center; flex-direction: row; gap: 30px;">
+                    <div style="display: flex; justify-content: center; flex-direction: column; gap: 10px;">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" value="" required/>
+                    </div>
+                    <div style="display: flex; justify-content: center; flex-direction: column; gap: 10px;">
+                    <label for="discord">Discord handle:</label>
+                    <input  type="text" name="discord" id="discord" value="" required/>
+                        </div>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input style="width: 100%" type="password" name="password" id="password" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+                </div>
+                <span id="success"></span>
+
+                <button style="width: 100%" type="submit" id="submit_button">Setup Account</button>
+            </div>
+            </div>
+        </form>
+
+</div>
+
+<script type="text/javascript" src="/static/js/setup.js"></script>
+</body>
+</html>
