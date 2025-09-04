@@ -54,7 +54,7 @@ door_text_form.addEventListener('submit', async (event) => {
     door_text_label.innerHTML = "Updating text..."
 
 
-    const formData = new FormData(form);
+    const formData = new FormData(door_text_form);
 
     try {
         await fetch('/api/door/set_text', {
