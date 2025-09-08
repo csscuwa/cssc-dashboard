@@ -15,8 +15,9 @@ def get_user_token(username):
     user_token = jwt.encode({"type": "user", "username": username}, SECRET_KEY, algorithm="HS256")
     return user_token
 
-def get_bot_token(username):
-    pass
+def get_bot_token(bot_name):
+    bot_token = jwt.encode({"type": "bot", "name": bot_name}, SECRET_KEY, algorithm="HS256")
+    return bot_token
 
 def validate_jwt(token):
     try:

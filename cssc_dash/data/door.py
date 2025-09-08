@@ -14,14 +14,14 @@ def set_door_status(db: Database, door_status: int, username):
         WHERE key = "door_status"
     """, (door_status,))
 
-    # Log this event to door.html log
+    # Log this event to door log
     db.cursor.execute("""
         INSERT INTO DoorLog (door_status, timestamp, username) 
         VALUES (?, ?, ?);
     """, (door_status, timestamp, username))
 
 def set_door_text(db, door_text: str, user_id: int):
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = datetime.datetime.now()
 
     # Set door text  to whatever this says it is
     db.cursor.execute("""
@@ -29,6 +29,7 @@ def set_door_text(db, door_text: str, user_id: int):
             SET value = ?
             WHERE key = "door_text"
     """, (door_text,))
+
 
     # Log this event to door log
     db.cursor.execute("""
@@ -49,6 +50,38 @@ def get_door_info(db):
 
 ## DOOR KEY LOG
 
+def get_latest_door_log(db):
+    query = """
+    SELECT
+        (SELECT username
+         FROM DoorLog
+         WHERE door_status IS NOT NULL
+         ORDER BY timestamp DESC
+         LIMIT 1) AS status_user,
+
+        (SELECT timestamp
+         FROM DoorLog
+         WHERE door_status IS NOT NULL
+         ORDER BY timestamp DESC
+         LIMIT 1) AS status_timestamp,
+
+        (SELECT username
+         FROM DoorLog
+         WHERE door_text IS NOT NULL
+         ORDER BY timestamp DESC
+         LIMIT 1) AS text_user,
+
+        (SELECT timestamp
+         FROM DoorLog
+         WHERE door_text IS NOT NULL
+         ORDER BY timestamp DESC
+         LIMIT 1) AS text_timestamp;
+    """
+
+    db.cursor.execute(query)
+    row = db.cursor.fetchone()
+
+    return {"latest_status_log": [key for key in row[:2]], "latest_text_log": [key for key in row[2:4]]}
 
 
 

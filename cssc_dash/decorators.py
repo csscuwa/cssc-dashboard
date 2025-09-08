@@ -5,7 +5,7 @@ from .data import get_client
 from .tools.jwt_tokens import validate_jwt, get_token_payload
 
 ## Return json code for api requests
-def auth_required(redirect=False):
+def auth_required(redirect=False, bot=False):
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):

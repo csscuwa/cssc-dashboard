@@ -9,8 +9,10 @@ from ..decorators import auth_required
 
 device = flask.Blueprint('device', __name__)
 
-
+@auth_required(bot=True)
 @device.route('/confirm')
 def _index():
+    confirm_token = request.args.get('token')
+
 
     return flask.jsonify()

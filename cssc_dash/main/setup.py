@@ -24,19 +24,19 @@ def setup_submit():
 
     session.pop('setupcode')
 
-    response = flask.jsonify({"account_created": True})
+    response = flask.jsonify({"status": 1, "account_created": True})
 
 
     return response
 
 @main.route("/setup")
 def validate_setup():
-    if session.get('setupcode'):
-        return flask.redirect(flask.url_for("main.setup_form"))
-
-    db = _get_db()
     setuptoken = request.args.get('token')
 
+    if not setuptoken:
+        return "Setup token is missing!", 400
+
+    db = _get_db()
     setupcode = validate_setup_token(db, setuptoken)
     db.close()
 
@@ -44,7 +44,7 @@ def validate_setup():
         session['setupcode'] = setupcode
         return flask.redirect(flask.url_for("main.setup_form"))
 
-    return flask.render_template("errors/401.html")
+    return "Setup code invalid!", 401
 
 
 

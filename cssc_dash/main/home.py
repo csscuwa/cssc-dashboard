@@ -14,14 +14,8 @@ from ..data.door import get_door_info
 def home(client):
     db = _get_db()
     door_info = get_door_info(db)
-    door_status = door_info['door_status']
     door_text = door_info['door_text']
 
     db.close()
 
-    if int(door_status):
-        door_status = "Open"
-    else:
-        door_status = "Closed"
-
-    return flask.render_template('home.html', username=client.username, door_status=door_status, door_text=door_text)
+    return flask.render_template('home.html', username=client.username, door_text=door_text)

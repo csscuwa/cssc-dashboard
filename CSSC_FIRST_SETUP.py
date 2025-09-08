@@ -33,7 +33,7 @@ def create_tables(cursor):
         CREATE TABLE IF NOT EXISTS DoorLog (
             'door_status' INT,
             'door_text' TEXT,
-            'timestamp' INT NOT NULL,
+            'timestamp' DATETIME NOT NULL,
             'username' TEXT NOT NULL
         );
     """
@@ -54,6 +54,14 @@ def create_tables(cursor):
             code TEXT NOT NULL UNIQUE PRIMARY KEY
         );
     """
+
+    cursor.execute(setup_codes_table)
+
+    setup_codes_table = """
+            CREATE TABLE IF NOT EXISTS DeviceConfirms (
+                code TEXT NOT NULL UNIQUE PRIMARY KEY
+            );
+        """
 
     cursor.execute(setup_codes_table)
 

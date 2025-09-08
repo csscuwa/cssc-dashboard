@@ -45,5 +45,8 @@ def get_client(token_payload):
 
         client = User(token_payload, user_data)
         return client
+    elif token_payload["type"] == "bot":
+        client = Client(token_payload)
+        return client
     else:
         return None
