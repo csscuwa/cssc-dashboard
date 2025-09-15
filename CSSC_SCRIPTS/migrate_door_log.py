@@ -8,3 +8,5 @@ db.cursor.execute("""
             INSERT INTO KeyedData (key, value)
             VALUES (?, ?);
     """, ("door_last_ping", "null"))
+
+db.close()

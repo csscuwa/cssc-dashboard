@@ -4,12 +4,13 @@ from flask import request
 from .data import get_client
 from .tools.jwt_tokens import validate_jwt, get_token_payload
 
-## Return json code for api requests
+
 def auth_required(redirect=False, bot=False):
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
             auth_headers = request.headers.get('Authorization')
+
             ## For web clients
             if auth_headers:
                 token = auth_headers.split()[1]
@@ -32,6 +33,10 @@ def auth_required(redirect=False, bot=False):
             token_payload = get_token_payload(token)
 
             client = get_client(token_payload)
+            
+            if bot:
+                if not client.type == "bot":
+                    return flask.jsonify({"error": f"Bearer Token Invalid", "status": 0}), 401
 
             return f(client, *args, **kwargs)
         return wrapper

@@ -20,9 +20,10 @@ def _index():
 
 @door.route('/ping')
 @auth_required(bot=True)
-def ping():
+def ping(client):
     db = _get_db()
     info = get_door_info(db)
+    set_last_ping(db)
     db.close()
 
     return flask.jsonify(info)

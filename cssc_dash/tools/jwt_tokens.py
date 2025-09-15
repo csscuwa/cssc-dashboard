@@ -12,11 +12,11 @@ def encode_jwt(payload):
     return encoded_jwt
 
 def get_user_token(username):
-    user_token = jwt.encode({"type": "user", "username": username}, SECRET_KEY, algorithm="HS256")
+    user_token = jwt.encode({"type": "user", "id": username}, SECRET_KEY, algorithm="HS256")
     return user_token
 
 def get_bot_token(bot_name):
-    bot_token = jwt.encode({"type": "bot", "name": bot_name}, SECRET_KEY, algorithm="HS256")
+    bot_token = jwt.encode({"type": "bot", "id": bot_name}, SECRET_KEY, algorithm="HS256")
     return bot_token
 
 def validate_jwt(token):

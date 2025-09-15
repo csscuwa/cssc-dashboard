@@ -14,6 +14,9 @@ var door_text_label = document.getElementById("door_text_label");
 
 var door_text_original_value = null
 
+var rpi_status = document.getElementById("rpi_status");
+var rpi_ping_label = document.getElementById("rpi_ping_label");
+var rpi_ping_time_label = document.getElementById("rpi_ping_time_label");
 
 open_button.addEventListener('click', async function() {
     try {
@@ -80,11 +83,42 @@ door_text_form.addEventListener('submit', async (event) => {
     }
 });
 
+//get time ago messages
+function timeAgo(dateString) {
+    const now = new Date();
+    const past = new Date(dateString.replace(" ", "T")); // Convert to ISO format
+
+    const diffMs = now - past;
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHour = Math.floor(diffMin / 60);
+    const diffDay = Math.floor(diffHour / 24);
+
+    // If more than 5 mins then set it to red to make it apparent to users that something is wrong
+    if (diffMin > 5) {
+        rpi_ping_label.style.color = "red";
+        rpi_status.style.color = "red"
+        rpi_status.innerHTML = "NO-PING"
+    } else {
+        pingElement.style.color = "green";
+        rpi_status.style.color = "green"
+        rpi_status.innerHTML = "O.K."
+    }
+
+    if (diffSec < 5) return `just now`;
+    if (diffSec < 60) return `${diffSec} seconds ago`;
+    if (diffMin < 60) return `${diffMin} minutes ago`;
+    if (diffHour < 24) return `${diffHour} hours ago`;
+    return `${diffDay} days ago`;
+}
+
+
 async function updateDoorStatus() {
     door_status_update_label.innerHTML = "Updating door status...";
     door_text_update_label.innerHTML = "Updating door text...";
 
     try {
+        // Get API responses
         const response = await fetch("/api/door");
         if (!response.ok) throw new Error("Network response was not ok");
 
@@ -96,10 +130,13 @@ async function updateDoorStatus() {
 
         document.getElementById("door_status").innerHTML = data.door_status;
 
+
+        // Check to see if the current server value has been set, if not change it
         if (door_text_original_value == null) {
             door_text_original_value = data.door_text;
         }
-
+        
+        // Only update the textbox if there hasn't been any altercations to the input as to prevent deletion of user edits.
         if (door_text.value === door_text_original_value) {
             door_text.value = data.door_text
         }
@@ -121,6 +158,10 @@ async function updateDoorStatus() {
         // get door log info
         door_status_update_label.innerHTML = "Last updated by " + log_data.latest_status_log[0] + " at " + log_data.latest_status_log[1];
         door_text_update_label.innerHTML = "Last updated by " + log_data.latest_text_log[0] + " at " + log_data.latest_text_log[1];
+
+        rpi_ping_label.innerHTML = timeAgo(data.door_last_ping);
+        // Set exact time for ppl to know
+        rpi_ping_time_label.innerHTML = data.door_last_ping;
 
 
     } catch (error) {

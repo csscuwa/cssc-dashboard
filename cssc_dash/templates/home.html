@@ -42,14 +42,32 @@
                 <form id="door_text_form" action="/api/door/set_text">
                     <label for="door_text">Update Door Text:</label><br>
                     <input type="text" id="door_text" name="door_text" value="{{ door_text }}"><br><br>
-                    <input type="submit" id="door_text_submit" value="Update"><br>
-                    <span id="door_text_label"></span>
+                    <div>
+                        <input type="submit" id="door_text_submit" value="Update">
+                        <span id="door_text_label"></span>
+                    </div>
                 </form><br>
+                <i id="door_text_update_label" style="color: #808080">Last updated by</i>
             </div>
-            <i id="door_text_edit_label" style="color: #808080"></i>
-            <i id="door_text_update_label" style="color: #808080">Last updated by</i>
 
         </div>
+    </div>
+
+    <div class="row_container">
+        <div class="col_container">
+            <h2>RPI Status | <i id="rpi_status" style="color: green;">OKAY</i></h2>
+            <div>
+                <span style="color: black">Device's last ping was</span>
+                <b id="rpi_ping_label"></b>
+            </div>
+            <i id="rpi_ping_time_label" style="color: #808080">null</i>
+            
+
+        </div>
+
+    </div>
+        
+
 
 </div>
 
