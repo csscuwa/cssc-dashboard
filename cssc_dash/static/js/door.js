@@ -100,7 +100,7 @@ function timeAgo(dateString) {
         rpi_status.style.color = "red"
         rpi_status.innerHTML = "NO-PING"
     } else {
-        pingElement.style.color = "green";
+        rpi_ping_label.style.color = "green";
         rpi_status.style.color = "green"
         rpi_status.innerHTML = "O.K."
     }
