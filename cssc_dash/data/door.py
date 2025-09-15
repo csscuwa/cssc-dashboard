@@ -47,6 +47,23 @@ def get_door_info(db):
 
     return {key: value for key, value in rows}
 
+def set_last_ping(db):
+    db.cursor.execute("""
+            UPDATE KeyedData 
+            SET value = ?
+            WHERE key = "door_last_ping"
+    """, (datetime.datetime.now(),))
+
+def get_last_ping(db):
+    query = """
+            SELECT key, value
+            FROM KeyedData
+            WHERE key = "door_last_ping";
+        """
+    rows = db.cursor.execute(query).fetchone()
+
+    return 
+
 
 ## DOOR KEY LOG
 

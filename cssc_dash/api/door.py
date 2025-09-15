@@ -18,6 +18,15 @@ def _index():
 
     return flask.jsonify(info)
 
+@door.route('/ping')
+@auth_required(bot=True)
+def ping():
+    db = _get_db()
+    info = get_door_info(db)
+    db.close()
+
+    return flask.jsonify(info)
+
 @door.route('/latest_log')
 def latest_log():
     db = _get_db()

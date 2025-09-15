@@ -5,8 +5,6 @@ import os
 from .user import get_user_data
 
 
-
-
 class Database:
     def __init__(self):
         self.conn = sqlite3.connect('data.db')
